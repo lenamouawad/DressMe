@@ -7,11 +7,7 @@ namespace DressMe.Config
 {
     public class DressMeDatabaseSettings : IDressMeDatabaseSettings
     {
-        public string DressingCollectionName { get; set; }
-        public string HautCollectionName { get; set; }
-        public string BasCollectionName { get; set; }
-        public string RobeCollectionName { get; set; }
-        public string ChemiseCollectionName { get; set; }
+        public string HautCollectionName { get; set; }     
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
 
@@ -19,12 +15,9 @@ namespace DressMe.Config
 
     public interface IDressMeDatabaseSettings
     {
-        public string DressingCollectionName { get; set; }
+        
         public string HautCollectionName { get; set; }
-        public string BasCollectionName { get; set; }
-        public string RobeCollectionName { get; set; }
-        public string ChemiseCollectionName { get; set; }
-
+      
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
 

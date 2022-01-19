@@ -1,6 +1,5 @@
 using DressMe.Config;
-using DressMe.Repositories;
-using DressMe.Services;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,12 +37,7 @@ namespace DressMe
             // Controllers
             services.AddControllers();
 
-            // Robe
-            services.AddSingleton<RobeRepository, RobeRepository>();
-            services.AddSingleton<RobesService, RobesService>();
-            // chemise
-            services.AddSingleton<ChemiseRepository, ChemiseRepository>();
-            services.AddSingleton<ChemisesService, ChemisesService>();
+            
 
         }
 
