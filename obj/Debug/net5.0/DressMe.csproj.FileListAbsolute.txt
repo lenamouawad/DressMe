@@ -43,3 +43,4 @@ C:\Users\Lena\Desktop\DressMe appli\DressMe\obj\Debug\net5.0\DressMe.dll
 C:\Users\Lena\Desktop\DressMe appli\DressMe\obj\Debug\net5.0\ref\DressMe.dll
 C:\Users\Lena\Desktop\DressMe appli\DressMe\obj\Debug\net5.0\DressMe.pdb
 C:\Users\Lena\Desktop\DressMe appli\DressMe\obj\Debug\net5.0\DressMe.genruntimeconfig.cache
+C:\Users\Lena\Desktop\DressMe appli\DressMe\bin\Debug\net5.0\Newtonsoft.Json.dll
