@@ -61,7 +61,7 @@ namespace DressMe.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest();
             }
         }
 
@@ -118,7 +118,7 @@ namespace DressMe.Controllers
             }
             catch (NotFoundException e)
             {
-                return NotFound("La matière choisie n'est pas valide." + e.Message);
+                return NotFound("La matière choisie n'est pas valide.");
             }
         }
 
@@ -137,7 +137,7 @@ namespace DressMe.Controllers
             }
             catch (NotFoundException e)
             {
-                return NotFound("Le type de manche choisi n'est pas valide" + e.Message);
+                return NotFound("Le type de manche choisi n'est pas valide");
             }
         }
     }
