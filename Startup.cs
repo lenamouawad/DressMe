@@ -1,5 +1,6 @@
 using DressMe.Config;
-
+using DressMe.Repositories;
+using DressMe.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -33,11 +34,13 @@ namespace DressMe
             services.AddSingleton<IDressMeDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DressMeDatabaseSettings>>().Value);
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }));
-
+            // Hauts
+            services.AddSingleton<HautRepository, HautRepository>();
+            services.AddSingleton<HautsService, HautsService>();
             // Controllers
             services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
-            
 
         }
 
