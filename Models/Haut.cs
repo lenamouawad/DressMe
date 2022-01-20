@@ -1,12 +1,13 @@
 ﻿using DressMe.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Text.Json.Serialization;
+//using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using MongoDB.Bson;
 
 namespace DressMe.Models
 {
@@ -15,7 +16,7 @@ namespace DressMe.Models
         courtes,
         longues,
         pasDeManches,
-        asymetrique,
+        asymetriques,
         bretelles
     }
 
@@ -36,12 +37,12 @@ namespace DressMe.Models
         trench        
     }
 
-    public abstract class Haut : IVetement
+    public class Haut : IVetement
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty("Couleur", ItemConverterType = typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public List<Couleur> Couleur { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
@@ -57,7 +58,9 @@ namespace DressMe.Models
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public CategorieHaut Categorie { get; set; }
-        public string Manches { get; set; }       
+        [JsonConverter(typeof(StringEnumConverter))]
+        [BsonRepresentation(BsonType.String)]
+        public Manches Manches { get; set; }       
         public bool EstImpermeable { get; set; }
         public bool ACapuche { get; set; }
 

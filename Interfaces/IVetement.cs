@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+//using System.Text.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace DressMe.Interfaces
 {
@@ -42,8 +43,9 @@ namespace DressMe.Interfaces
 
     public enum Motifs
     { 
-        pasDeMotifs, 
-        rayure, 
+        pasDeMotifs,
+        fleuri,
+        rayures, 
         imprime, 
         carreaux, 
         paillettes, 
@@ -87,7 +89,7 @@ namespace DressMe.Interfaces
 
     public interface IVetement
     {
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty("Couleur", ItemConverterType = typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public List<Couleur> Couleur { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
@@ -100,6 +102,5 @@ namespace DressMe.Interfaces
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public Types Type { get; set; }
-        //public Categorie Categorie { get; set; }
     }
 }
