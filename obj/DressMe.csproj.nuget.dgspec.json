@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lena\\Desktop\\DressMe appli\\DressMe\\DressMe.csproj": {}
+    "C:\\Workspaces\\Formation-m2i\\DressMe\\DressMe\\DressMe.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lena\\Desktop\\DressMe appli\\DressMe\\DressMe.csproj": {
+    "C:\\Workspaces\\Formation-m2i\\DressMe\\DressMe\\DressMe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lena\\Desktop\\DressMe appli\\DressMe\\DressMe.csproj",
+        "projectUniqueName": "C:\\Workspaces\\Formation-m2i\\DressMe\\DressMe\\DressMe.csproj",
         "projectName": "DressMe",
-        "projectPath": "C:\\Users\\Lena\\Desktop\\DressMe appli\\DressMe\\DressMe.csproj",
-        "packagesPath": "C:\\Users\\Lena\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lena\\Desktop\\DressMe appli\\DressMe\\obj\\",
+        "projectPath": "C:\\Workspaces\\Formation-m2i\\DressMe\\DressMe\\DressMe.csproj",
+        "packagesPath": "C:\\Users\\ngonk\\.nuget\\packages\\",
+        "outputPath": "C:\\Workspaces\\Formation-m2i\\DressMe\\DressMe\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lena\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ngonk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -79,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
