@@ -114,8 +114,7 @@ namespace DressMe.Repositories
         public List<Haut> GetAllByManche(string manche)
         {
             List<Haut> hautsDeManche = new List<Haut>() { };
-            Manches tryParseResult;
-            if (Enum.TryParse<Manches>(manche, out tryParseResult))
+            if (Enum.TryParse<Manches>(manche, out Manches tryParseResult))
             {
                 hautsDeManche = this.hauts.Find(haut => haut.Manches == tryParseResult).ToList();
             }
@@ -128,5 +127,60 @@ namespace DressMe.Repositories
             return hautsDeManche;
         }
 
+        /// <summary>
+        /// Returns all non patterned tops
+        /// </summary>
+        /// <returns></returns>
+        public List<Haut> GetNoPattern()
+        {
+            Enum.TryParse<Motifs>("pasDeMotifs", out Motifs noMotif);
+            return this.hauts.Find(haut => haut.Motifs == noMotif).ToList();
+        }
+
+        /// <summary>
+        /// Returns all patterned tops
+        /// </summary>
+        /// <returns></returns>
+        public List<Haut> GetWithPattern()
+        {
+            Enum.TryParse<Motifs>("pasDeMotifs", out Motifs noMotif);
+            return this.hauts.Find(haut => haut.Motifs != noMotif).ToList();
+        }
+
+        /// <summary>
+        /// Returns all tops with party patterns 
+        /// </summary>
+        /// <returns></returns>
+        public List<Haut> GetPartyPattern()
+        {
+
+            Enum.TryParse<Motifs>("paillettes", out Motifs paillettes);
+            Enum.TryParse<Motifs>("strass", out Motifs strass);
+            Enum.TryParse<Motifs>("perles", out Motifs perles);
+
+            return this.hauts.Find(haut => haut.Motifs == paillettes || haut.Motifs == strass || haut.Motifs == perles).ToList();
+        }
+
+        /// <summary>
+        /// Returns all tops of a selected category
+        /// </summary>
+        /// <param name="categorie"></param>
+        /// <returns></returns>
+        public List<Haut> GetByCategorie(string categorie)
+        {
+            List<Haut> hautsDeCategorie = new List<Haut>() { };
+            if (Enum.TryParse<CategorieHaut>(categorie, out CategorieHaut tryParseResult))
+            {
+                hautsDeCategorie = this.hauts.Find(haut => haut.Categorie == tryParseResult).ToList();
+            }
+            else
+            {
+                // input string is not a valid enum Categorie
+                throw new NotFoundException($"La categorie choisie n'est pas valide");
+            }
+
+            return hautsDeCategorie;
+        }
+       
     }
 }

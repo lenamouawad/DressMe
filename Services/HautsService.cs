@@ -100,5 +100,32 @@ namespace DressMe.Services
         {
             return this.repository.GetAllByManche(manche);
         }
+
+        /// <summary>
+        /// Returns all non patterned tops
+        /// </summary>
+        /// <returns></returns>
+        public List<Haut> GetNoPattern()
+        {         
+            return this.repository.GetNoPattern();
+        }
+
+        /// <summary>
+        /// Returns all patterned tops
+        /// </summary>
+        /// <returns></returns>
+        public List<Haut> GetWithPattern()
+        {
+            return this.repository.GetWithPattern();
+        }
+
+        /// <summary>
+        /// Returns all tops with party patterns 
+        /// </summary>
+        /// <returns></returns>
+        public List<Haut> GetPartyPattern()
+        {
+            return this.repository.GetPartyPattern();
+        }
     }
 }
