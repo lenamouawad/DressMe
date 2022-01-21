@@ -89,21 +89,10 @@ namespace DressMe.Repositories
         /// </summary>
         /// <param name="matiere"></param>
         /// <returns></returns>
-        public List<Haut> GetAllByMatiere(string matiere)
+        public List<Haut> GetAllByMatiere(Matiere matiere)
         {
-            List<Haut> hautsDeMatiere = new List<Haut>() {};
-            Matiere tryParseResult;
-            if (Enum.TryParse<Matiere>(matiere, out tryParseResult))
-            {
-                hautsDeMatiere = this.hauts.Find(haut => haut.Matiere == tryParseResult).ToList();
-            }
-            else
-            {
-                // input string is not a valid enum Matiere
-                throw new NotFoundException($"La matière choisie n'est pas valide.");
-            }
-
-            return hautsDeMatiere;
+            return this.hauts.Find(haut => haut.Matiere == matiere).ToList();
+           
         }
 
         /// <summary>
@@ -166,21 +155,9 @@ namespace DressMe.Repositories
         /// </summary>
         /// <param name="categorie"></param>
         /// <returns></returns>
-        public List<Haut> GetByCategorie(string categorie)
+        public List<Haut> GetByCategorie(CategorieHaut categorie)
         {
-            List<Haut> hautsDeCategorie = new List<Haut>() { };
-            if (Enum.TryParse<CategorieHaut>(categorie, out CategorieHaut tryParseResult))
-            {
-                hautsDeCategorie = this.hauts.Find(haut => haut.Categorie == tryParseResult).ToList();
-            }
-            else
-            {
-                // input string is not a valid enum Categorie
-                throw new NotFoundException($"La categorie choisie n'est pas valide");
-            }
-
-            return hautsDeCategorie;
+            return this.hauts.Find(haut => haut.Categorie == categorie).ToList();
         }
-       
     }
 }
