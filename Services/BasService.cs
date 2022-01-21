@@ -27,7 +27,10 @@ namespace DressMe.Services
         public List<Bas> FindAll()
         {
             List<Bas> listBas = this.repository.FindAll();
-
+            if(listBas == null)
+            {
+                throw new NotFoundException($"Not found bas");
+            }
             return listBas;
 
         }
@@ -37,7 +40,7 @@ namespace DressMe.Services
             Bas bas = this.repository.FindById(id);
             if (bas == null)
             {
-                throw new NotFoundException($"None of the hauts has the ID {id}");
+                throw new NotFoundException($"None of the bas has the ID {id}");
             }
             return bas;
         }
@@ -47,9 +50,52 @@ namespace DressMe.Services
             this.repository.Delete(id);
         }
 
-        public void Update(string id, Bas bas)
+        public Bas Update(string id, Bas bas)
         {
             this.repository.Update(id, bas);
+
+            return bas;
         }
+
+        public List<Bas> FindByCategorie(string categorie)
+        {
+            List<Bas> listBas = this.repository.FindByCategorie(categorie);
+            if (listBas == null)
+            {
+                throw new NotFoundException($"Not found bas with {categorie} categorie");
+            }
+            return listBas;
+        }
+
+        public List<Bas> FindByMatiere(string matiere)
+        {
+            List<Bas> listBas = this.repository.FindByMatiere(matiere);
+            if (listBas == null)
+            {
+                throw new NotFoundException($"Not found bas with {matiere} matiere");
+            }
+            return listBas;
+        }
+
+        public List<Bas> FindByMotif(string motif)
+        {
+            List<Bas> listBas = this.repository.FindByMotif(motif);
+            if (listBas == null)
+            {
+                throw new NotFoundException($"Not found bas with {motif} motif");
+            }
+            return listBas;
+        }
+
+        public List<Bas> FindByType(string type)
+        {
+            List<Bas> listBas = this.repository.FindByType(type);
+            if (listBas == null)
+            {
+                throw new NotFoundException($"Not found bas with {type} type");
+            }
+            return listBas;
+        }
+
     }
 }

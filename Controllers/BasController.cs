@@ -51,8 +51,7 @@ namespace DressMe.Controllers
         {
             try
             {
-                this.service.Update(id, bas);
-                return Ok($"Le {bas.Categorie} avec l'id {id} été modifier");
+                return Ok(this.service.Update(id, bas));
             }
             catch (Exception e)
             {
@@ -72,6 +71,62 @@ namespace DressMe.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpGet("categorie/{categorie}")]
+        public IActionResult FindByCategorie(string categorie)
+        {
+            try
+            {
+                return Ok(this.service.FindByCategorie(categorie));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        [HttpGet("matiere/{matiere}")]
+        public IActionResult FindByMatiere(string matiere)
+        {
+            try
+            {
+                return Ok(this.service.FindByMatiere(matiere));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        [HttpGet("motif/{motif}")]
+        public IActionResult FindByMotif(string motif)
+        {
+            try
+            {
+                return Ok(this.service.FindByMotif(motif));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        [HttpGet("type/{type}")]
+        public IActionResult FindByType(string type)
+        {
+            try
+            {
+                return Ok(this.service.FindByType(type));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
         }
     }
 }
