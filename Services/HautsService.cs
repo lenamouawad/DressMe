@@ -1,4 +1,5 @@
 ﻿using DressMe.Exceptions;
+using DressMe.Interfaces;
 using DressMe.Models;
 using DressMe.Repositories;
 using System;
@@ -67,7 +68,7 @@ namespace DressMe.Services
             Haut haut = this.repository.FindById(id);
             if (haut == null)
             {
-                throw new NotFoundException($"None of the hauts has the ID {id}");
+                throw new NotFoundException($"Aucun des hauts n'a ce id :  {id}");
             }
             return haut;
         }
@@ -88,7 +89,18 @@ namespace DressMe.Services
         /// <returns></returns>
         public List<Haut> GetAllByMatiere(string matiere)
         {
-            return this.repository.GetAllByMatiere(matiere);
+            List<Haut> hautsDeMatiere = new List<Haut>() { };
+            if (Enum.TryParse(matiere, out Matiere tryParseResult))
+            {
+                hautsDeMatiere = this.repository.GetAllByMatiere(tryParseResult);
+            }
+            else
+            {
+                // input string is not a valid enum Matiere
+                throw new NotFoundException($"La matière choisie n'est pas valide.");
+            }
+
+            return hautsDeMatiere;
         }
 
         /// <summary>
@@ -124,8 +136,29 @@ namespace DressMe.Services
         /// </summary>
         /// <returns></returns>
         public List<Haut> GetPartyPattern()
-        {
+        {            
             return this.repository.GetPartyPattern();
+        }
+
+        /// <summary>
+        /// Returns all tops of a selected category
+        /// </summary>
+        /// <param name="categorie"></param>
+        /// <returns></returns>
+        public List<Haut> GetByCategorie(string categorie)
+        {
+            List<Haut> hautsDeCategorie = new List<Haut>() { };
+            if (Enum.TryParse(categorie, out CategorieHaut tryParseResult))
+            {
+                hautsDeCategorie = this.repository.GetByCategorie(tryParseResult);
+            }
+            else
+            {
+                // input string is not a valid enum Categorie
+                throw new NotFoundException($"La categorie choisie n'est pas valide");
+            }
+
+            return hautsDeCategorie;
         }
     }
 }

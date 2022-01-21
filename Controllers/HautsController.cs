@@ -169,5 +169,16 @@ namespace DressMe.Controllers
         {
             return Ok(this.service.GetPartyPattern());
         }
+
+        /// <summary>
+        /// Returns all tops of a selected category
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("categorie/{categorie}")]
+        public IActionResult GetByCategorie(string categorie)
+        {
+            return Ok(this.service.GetByCategorie(categorie));
+        }
+        
     }
 }
