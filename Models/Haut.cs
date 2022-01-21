@@ -1,11 +1,8 @@
-﻿using DressMe.Interfaces;
+﻿
+using DressMe.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-//using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -34,9 +31,8 @@ namespace DressMe.Models
         blazer,
         manteau,
         doudoune,
-        trench        
+        trench
     }
-
     public class Haut : IVetement
     {
         [BsonId]
@@ -60,11 +56,9 @@ namespace DressMe.Models
         public CategorieHaut Categorie { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
-        public Manches Manches { get; set; }       
+        public Manches Manches { get; set; }
         public bool EstImpermeable { get; set; }
         public bool ACapuche { get; set; }
 
     }
-
-
 }

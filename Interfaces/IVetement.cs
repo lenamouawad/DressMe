@@ -12,80 +12,69 @@ using Newtonsoft.Json;
 
 namespace DressMe.Interfaces
 {
-   /* public enum Categorie
-    {
-        robe,
-        pull,
-        sweat,
-        tshirt,
-        top,
-        chemise,
-        blouse,
-        gilet,
-        veste,
-        blazer,
-        manteau,
-        doudoune,
-        trench,
-        pantalon,
-        jeans,
-        shorts,
-        jupe
-    }*/
-
     public enum Types
     {
         sport,
         maison,
         habille,
-        decontracte
+        soiree,
+        decontracte,
+        exterieur
     }
 
     public enum Motifs
-    { 
+    {
         pasDeMotifs,
         fleuri,
-        rayures, 
-        imprime, 
-        carreaux, 
-        paillettes, 
+        rayures,
+        imprime,
+        carreaux,
+        paillettes,
         marbre,
-        geometrique, 
-        strass, 
-        perles, 
-        chevrons }
+        geometrique,
+        strass,
+        perles,
+        chevrons,
+        texte
+    }
 
-    public enum Matiere { 
-        denim, 
-        maille, 
-        coton, 
-        lin, 
-        fourrure, 
-        laine, 
-        synthetique, 
-        satin, 
-        cachemire, 
-        velours, 
-        dentelle, 
-        tricot, 
-        sequins }
+    public enum Matiere
+    {
+        denim,
+        maille,
+        coton,
+        lin,
+        fourrure,
+        laine,
+        satin,
+        soie,
+        cuir,
+        cachemire,
+        velours,
+        dentelle,
+        tricot,
+        autre
+    }
 
-    public enum Couleur { 
-        jaune, 
+    public enum Couleur
+    {
+        jaune,
         rouge,
-        bleu, 
+        bleu,
         orange,
         magenta,
         marron,
         gris,
         beige,
         kaki,
-        violet, 
+        violet,
         rose,
-        turquoise, 
+        turquoise,
         vert,
-        blanc, 
-        noir}
+        blanc,
+        noir,
+        bordeaux
+    }
 
     public interface IVetement
     {
