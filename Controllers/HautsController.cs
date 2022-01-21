@@ -122,7 +122,6 @@ namespace DressMe.Controllers
             }
         }
 
-
         /// <summary>
         /// Returns all tops of a selected fabric
         /// </summary>
@@ -139,6 +138,36 @@ namespace DressMe.Controllers
             {
                 return NotFound("Le type de manche choisi n'est pas valide");
             }
+        }
+
+        /// <summary>
+        /// Returns all non patterned tops
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("sansMotifs")]
+        public IActionResult GetNoPattern()
+        {
+            return Ok(this.service.GetNoPattern());
+        }
+
+        /// <summary>
+        /// Returns all patterned tops
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("avecMotifs")]
+        public IActionResult GetWithPattern()
+        {
+            return Ok(this.service.GetWithPattern());
+        }
+
+        /// <summary>
+        /// Returns all tops with party patterns 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("motifsDeFete")]
+        public IActionResult GetPartyPattern()
+        {
+            return Ok(this.service.GetPartyPattern());
         }
     }
 }
