@@ -17,11 +17,9 @@ namespace DressMe.Services
         }
 
 
-        public Bas Create(Bas bas)
+        public List<Bas> Create(Bas bas)
         {
-            this.repository.Create(bas);
-
-            return bas;
+            return this.repository.Create(bas);
         }
 
         public List<Bas> FindAll()
@@ -51,5 +49,15 @@ namespace DressMe.Services
         {
             this.repository.Update(id, bas);
         }
+
+        /// <summary>
+        /// Delete all Bas
+        /// </summary>
+        /// <returns></returns>
+        public List<Bas> DeleteAllBas()
+        {
+            return this.repository.DeleteAllBas();
+        }
+
     }
 }

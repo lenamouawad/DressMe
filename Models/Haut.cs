@@ -13,7 +13,6 @@ namespace DressMe.Models
         courtes,
         longues,
         pasDeManches,
-        asymetriques,
         bretelles
     }
 

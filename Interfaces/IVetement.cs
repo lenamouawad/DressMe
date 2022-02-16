@@ -15,10 +15,9 @@ namespace DressMe.Interfaces
     public enum Types
     {
         sport,
-        maison,
+        decontracte,
         habille,
         soiree,
-        decontracte,
         exterieur
     }
 
@@ -53,6 +52,8 @@ namespace DressMe.Interfaces
         velours,
         dentelle,
         tricot,
+        synthetique,
+        polyester,
         autre
     }
 

@@ -31,9 +31,16 @@ namespace DressMe.Controllers
         [HttpPost]
         public IActionResult AddHaut(Haut haut)
         {
-            return Created("", service.AddHaut(haut));
+            try
+            {
+                return Created("", service.AddHaut(haut));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
         }
-      
+
         /// <summary>
         /// Modify a top
         /// </summary>
@@ -43,7 +50,14 @@ namespace DressMe.Controllers
         [HttpPut("update")]
         public IActionResult UpdateHaut(String id, Haut hautUpdated)
         {
-            return Ok(service.UpdateHaut(id, hautUpdated));
+            try
+            {
+                return Ok(service.UpdateHaut(id, hautUpdated));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
         }
 
         /// <summary>
@@ -71,9 +85,17 @@ namespace DressMe.Controllers
         /// <returns></returns>
         [HttpDelete("deleteAllHaut")]
         public IActionResult DeleteAllHaut()
-        {           
-            this.service.DeleteAllHaut();
-            return Ok("All the tops are deleted");
+        {
+            try
+            {
+                this.service.DeleteAllHaut();
+                return Ok("All the tops are deleted");
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
         }
 
         /// <summary>
@@ -83,7 +105,14 @@ namespace DressMe.Controllers
         [HttpGet("allHauts")]
         public IActionResult GetAllHauts()
         {
-            return Ok(this.service.GetAllHauts());
+            try
+            {
+                return Ok(this.service.GetAllHauts());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         /// <summary>
@@ -147,7 +176,14 @@ namespace DressMe.Controllers
         [HttpGet("sansMotifs")]
         public IActionResult GetNoPattern()
         {
-            return Ok(this.service.GetNoPattern());
+            try
+            {
+                return Ok(this.service.GetNoPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         /// <summary>
@@ -157,7 +193,14 @@ namespace DressMe.Controllers
         [HttpGet("avecMotifs")]
         public IActionResult GetWithPattern()
         {
-            return Ok(this.service.GetWithPattern());
+            try
+            {
+                return Ok(this.service.GetWithPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         /// <summary>
@@ -167,7 +210,14 @@ namespace DressMe.Controllers
         [HttpGet("motifsDeFete")]
         public IActionResult GetPartyPattern()
         {
-            return Ok(this.service.GetPartyPattern());
+            try
+            {
+                return Ok(this.service.GetPartyPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         /// <summary>
@@ -177,8 +227,52 @@ namespace DressMe.Controllers
         [HttpGet("categorie/{categorie}")]
         public IActionResult GetByCategorie(string categorie)
         {
-            return Ok(this.service.GetByCategorie(categorie));
+            try
+            {
+                return Ok(this.service.GetByCategorie(categorie));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
         }
-        
+
+        /// <summary>
+        /// Returns all tops of a selected pattern
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("motif/{motif}")]
+        public IActionResult GetByMotif(string motif)
+        {
+            try
+            {
+                return Ok(this.service.GetByMotif(motif));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Returns all tops of a selected type/occasion
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("type/{type}")]
+        public IActionResult GetByType(string type)
+        {
+            try
+            {
+                return Ok(this.service.GetByType(type));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
     }
 }

@@ -73,5 +73,24 @@ namespace DressMe.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        /// <summary>
+        /// Delete all Bas
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("deleteAllBas")]
+        public IActionResult DeleteAllBas()
+        {
+            try
+            {
+                this.service.DeleteAllBas();
+                return Ok("Tous les bas ont été supprimés");
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
     }
 }
