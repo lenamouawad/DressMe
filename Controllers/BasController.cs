@@ -92,5 +92,110 @@ namespace DressMe.Controllers
             }
 
         }
+
+        /// <summary>
+        /// Returns all non patterned bas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("sansMotifs")]
+        public IActionResult FindNoPattern()
+        {
+            try
+            {
+                return Ok(this.service.FindNoPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns all patterned bas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("avecMotifs")]
+        public IActionResult FindWithPattern()
+        {
+            try
+            {
+                return Ok(this.service.FindWithPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns all bas with party patterns 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("motifsDeFete")]
+        public IActionResult FindPartyPattern()
+        {
+            try
+            {
+                return Ok(this.service.FindPartyPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns all bas of a selected category
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("categorie/{categorie}")]
+        public IActionResult FindByCategorie(string categorie)
+        {
+            try
+            {
+                return Ok(this.service.FindByCategorie(categorie));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Returns all bas of a selected pattern
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("motif/{motif}")]
+        public IActionResult FindByMotif(string motif)
+        {
+            try
+            {
+                return Ok(this.service.FindByMotif(motif));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Returns all bas of a selected type/occasion
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("type/{type}")]
+        public IActionResult FindByType(string type)
+        {
+            try
+            {
+                return Ok(this.service.FindByType(type));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
     }
 }
