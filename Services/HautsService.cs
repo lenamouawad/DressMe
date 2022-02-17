@@ -35,7 +35,17 @@ namespace DressMe.Services
         /// <returns>updated room info</returns>
         public Haut UpdateHaut(String id, Haut hautUpdated)
         {
-            return this.repository.UpdateHaut(id, hautUpdated);
+            Haut haut = this.repository.FindById(id);
+            if (haut == null)
+            {
+                throw new NotFoundException($"Aucun des hauts n'a ce id :  {id}");
+            }
+            else
+            {
+                haut = this.repository.UpdateHaut(id, hautUpdated);
+            }
+
+            return haut;
         }
 
         /// <summary>
@@ -45,7 +55,18 @@ namespace DressMe.Services
         /// <returns></returns>
         public List<Haut> DeleteHaut(string id)
         {
-            return this.repository.DeleteHaut(id); ;
+            Haut haut = this.repository.FindById(id);
+            List<Haut> listHauts = new List<Haut>() { };
+
+            if (haut == null)
+            {
+                throw new NotFoundException($"Aucun des hauts n'a ce id :  {id}");
+            }
+            else
+            {
+                listHauts = this.repository.DeleteHaut(id);
+            }
+            return listHauts;
         }
 
         /// <summary>
@@ -89,10 +110,14 @@ namespace DressMe.Services
         /// <returns></returns>
         public List<Haut> GetAllByMatiere(string matiere)
         {
-            List<Haut> hautsDeMatiere = new List<Haut>() { };
+            List<Haut> listHauts = new List<Haut>() { };
             if (Enum.TryParse(matiere, out Matiere tryParseResult))
             {
-                hautsDeMatiere = this.repository.GetAllByMatiere(tryParseResult);
+                listHauts = this.repository.GetAllByMatiere(tryParseResult);
+                if (listHauts == null)
+                {
+                    throw new NotFoundException($"Aucun haut de la matière {matiere} n'existe");
+                }
             }
             else
             {
@@ -100,7 +125,7 @@ namespace DressMe.Services
                 throw new NotFoundException($"La matière choisie n'est pas valide.");
             }
 
-            return hautsDeMatiere;
+            return listHauts;
         }
 
         /// <summary>
@@ -110,7 +135,41 @@ namespace DressMe.Services
         /// <returns></returns>
         public List<Haut> GetAllByManche(string manche)
         {
-            return this.repository.GetAllByManche(manche);
+            List<Haut> listHauts = this.repository.GetAllByManche(manche);
+            if (listHauts == null)
+            {
+                throw new NotFoundException($"Aucun haut ayant le type de manche {manche} n'existe");
+            }
+            return listHauts;
+        }
+
+        /// <summary>
+        /// Returns all tops of a selected type/occasion
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public List<Haut> GetByType(string type)
+        {
+            List<Haut> listHauts = this.repository.GetByType(type);
+            if (listHauts == null)
+            {
+                throw new NotFoundException($"Aucun haut n'existe du type {type}");
+            }
+            return listHauts;
+        }
+
+        /// <summary>
+        /// Returns all tops with a selected pattern
+        /// </summary>
+        /// <param name="motif"></param>
+        public List<Haut> GetByMotif(string motif)
+        {
+            List<Haut> listHaut = this.repository.GetByPattern(motif);
+            if (listHaut == null)
+            {
+                throw new NotFoundException($"Aucun haut n'existe ayant le motif {motif}");
+            }
+            return listHaut;
         }
 
         /// <summary>
@@ -118,8 +177,13 @@ namespace DressMe.Services
         /// </summary>
         /// <returns></returns>
         public List<Haut> GetNoPattern()
-        {         
-            return this.repository.GetNoPattern();
+        {
+            List<Haut> listHauts = this.repository.GetNoPattern();
+            if (listHauts == null)
+            {
+                throw new NotFoundException($"Aucun haut sans motif n'existe");
+            }
+            return listHauts;
         }
 
         /// <summary>
@@ -128,7 +192,12 @@ namespace DressMe.Services
         /// <returns></returns>
         public List<Haut> GetWithPattern()
         {
-            return this.repository.GetWithPattern();
+            List<Haut> listHauts = this.repository.GetWithPattern();
+            if (listHauts == null)
+            {
+                throw new NotFoundException($"Aucun haut ayant des motifs n'existe");
+            }
+            return listHauts;
         }
 
         /// <summary>
@@ -136,8 +205,13 @@ namespace DressMe.Services
         /// </summary>
         /// <returns></returns>
         public List<Haut> GetPartyPattern()
-        {            
-            return this.repository.GetPartyPattern();
+        {
+            List<Haut> listHauts = this.repository.GetPartyPattern();
+            if (listHauts == null)
+            {
+                throw new NotFoundException($"Aucun haut ayant des motifs de fete n'existe");
+            }
+            return listHauts;
         }
 
         /// <summary>
@@ -147,10 +221,14 @@ namespace DressMe.Services
         /// <returns></returns>
         public List<Haut> GetByCategorie(string categorie)
         {
-            List<Haut> hautsDeCategorie = new List<Haut>() { };
+            List<Haut> listHauts = new List<Haut>() { };
             if (Enum.TryParse(categorie, out CategorieHaut tryParseResult))
             {
-                hautsDeCategorie = this.repository.GetByCategorie(tryParseResult);
+                listHauts = this.repository.GetByCategorie(tryParseResult);
+                if (listHauts == null)
+                {
+                    throw new NotFoundException($"Aucun haut de la categorie {categorie} n'existe");
+                }
             }
             else
             {
@@ -158,7 +236,7 @@ namespace DressMe.Services
                 throw new NotFoundException($"La categorie choisie n'est pas valide");
             }
 
-            return hautsDeCategorie;
+            return listHauts;
         }
     }
 }

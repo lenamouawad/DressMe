@@ -1,4 +1,5 @@
-﻿using DressMe.Interfaces;
+﻿
+using DressMe.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json.Converters;
@@ -20,11 +21,17 @@ namespace DressMe.Models
         bottes,
         mocassin
     }
-    public class Chaussure
+    public class Chaussure : IVetement
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
+        List<Couleur> IVetement.Couleur { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Matiere Matiere { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Motifs Motifs { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ImgUrl { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Types Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public List<Couleur> Couleur;

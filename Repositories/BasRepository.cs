@@ -5,7 +5,6 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DressMe.Repositories
 {
@@ -13,7 +12,7 @@ namespace DressMe.Repositories
     {
         private readonly IMongoCollection<Bas> repo;
 
-        public BasRepository(DressMeDatabaseSettings settings)
+        public BasRepository(IDressMeDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
@@ -31,9 +30,11 @@ namespace DressMe.Repositories
             return this.repo.Find(b => true).ToList();
         }
 
-        public void Create(Bas bas)
+        public List<Bas> Create(Bas bas)
         {
             this.repo.InsertOne(bas);
+            return this.repo.Find(bas => true).ToList();
+
         }
 
         public void Update(string id, Bas bas)
@@ -89,6 +90,40 @@ namespace DressMe.Repositories
             }
 
             return basByType;
+        }
+
+        public List<Bas> FindNoPattern()
+        {
+            Enum.TryParse<Motifs>("pasDeMotifs", out Motifs noMotif);
+            return this.repo.Find(bas => bas.Motifs == noMotif).ToList();
+        }
+
+
+        public List<Bas> FindWithPattern()
+        {
+            Enum.TryParse<Motifs>("pasDeMotifs", out Motifs noMotif);
+            return this.repo.Find(bas => bas.Motifs != noMotif).ToList();
+        }
+
+
+        public List<Bas> FindPartyPattern()
+        {
+
+            Enum.TryParse<Motifs>("paillettes", out Motifs paillettes);
+            Enum.TryParse<Motifs>("strass", out Motifs strass);
+            Enum.TryParse<Motifs>("perles", out Motifs perles);
+
+            return this.repo.Find(bas => bas.Motifs == paillettes || bas.Motifs == strass || bas.Motifs == perles).ToList();
+        }
+
+        /// <summary>
+        /// Delete all Bas
+        /// </summary>
+        /// <returns></returns>
+        public List<Bas> DeleteAllBas()
+        {
+            this.repo.DeleteMany(bas => true);
+            return this.repo.Find(bas => true).ToList();
         }
     }
 }

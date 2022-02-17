@@ -51,7 +51,8 @@ namespace DressMe.Controllers
         {
             try
             {
-                return Ok(this.service.Update(id, bas));
+                this.service.Update(id, bas);
+                return Ok($"Le {bas.Categorie} avec l'id {id} a été modifié");
             }
             catch (Exception e)
             {
@@ -73,20 +74,7 @@ namespace DressMe.Controllers
             }
         }
 
-        [HttpGet("categorie/{categorie}")]
-        public IActionResult FindByCategorie(string categorie)
-        {
-            try
-            {
-                return Ok(this.service.FindByCategorie(categorie));
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-
-        }
-
+        
         [HttpGet("matiere/{matiere}")]
         public IActionResult FindByMatiere(string matiere)
         {
@@ -101,6 +89,102 @@ namespace DressMe.Controllers
 
         }
 
+        
+
+        
+
+        /// <summary>
+        /// Delete all Bas
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("deleteAllBas")]
+        public IActionResult DeleteAllBas()
+        {
+            try
+            {
+                this.service.DeleteAllBas();
+                return Ok("Tous les bas ont été supprimés");
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Returns all non patterned bas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("sansMotifs")]
+        public IActionResult FindNoPattern()
+        {
+            try
+            {
+                return Ok(this.service.FindNoPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns all patterned bas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("avecMotifs")]
+        public IActionResult FindWithPattern()
+        {
+            try
+            {
+                return Ok(this.service.FindWithPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns all bas with party patterns 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("motifsDeFete")]
+        public IActionResult FindPartyPattern()
+        {
+            try
+            {
+                return Ok(this.service.FindPartyPattern());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns all bas of a selected category
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("categorie/{categorie}")]
+        public IActionResult FindByCategorie(string categorie)
+        {
+            try
+            {
+                return Ok(this.service.FindByCategorie(categorie));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Returns all bas of a selected pattern
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("motif/{motif}")]
         public IActionResult FindByMotif(string motif)
         {
@@ -115,6 +199,10 @@ namespace DressMe.Controllers
 
         }
 
+        /// <summary>
+        /// Returns all bas of a selected type/occasion
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("type/{type}")]
         public IActionResult FindByType(string type)
         {

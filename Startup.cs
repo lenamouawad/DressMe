@@ -37,6 +37,16 @@ namespace DressMe
             // Hauts
             services.AddSingleton<HautRepository, HautRepository>();
             services.AddSingleton<HautsService, HautsService>();
+            // Bas
+            services.AddSingleton<BasRepository, BasRepository>();
+            services.AddSingleton<BasService, BasService>();
+            // Chaussure
+            services.AddSingleton<ChaussureRepository, ChaussureRepository>();
+            services.AddSingleton<ChaussuresService, ChaussuresService>();
+            // Tenue
+            services.AddSingleton<TenueRepository, TenueRepository>();
+            services.AddSingleton<TenueService, TenueService>();
+
             // Controllers
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson();
