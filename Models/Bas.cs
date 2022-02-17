@@ -16,6 +16,7 @@ namespace DressMe.Models
         jupeLongue,
         jupeCourte
     }
+
     public class Bas : IVetement
     {
         [BsonId]
@@ -35,7 +36,6 @@ namespace DressMe.Models
         [BsonRepresentation(BsonType.String)]
         public Types Type { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-       // [JsonProperty("Categorie", ItemConverterType = typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public CategorieBas Categorie { get; set; }
 

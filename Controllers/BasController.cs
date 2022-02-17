@@ -52,7 +52,7 @@ namespace DressMe.Controllers
             try
             {
                 this.service.Update(id, bas);
-                return Ok($"Le {bas.Categorie} avec l'id {id} été modifier");
+                return Ok($"Le {bas.Categorie} avec l'id {id} a été modifié");
             }
             catch (Exception e)
             {
@@ -73,6 +73,25 @@ namespace DressMe.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        
+        [HttpGet("matiere/{matiere}")]
+        public IActionResult FindByMatiere(string matiere)
+        {
+            try
+            {
+                return Ok(this.service.FindByMatiere(matiere));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        
+
+        
 
         /// <summary>
         /// Delete all Bas
