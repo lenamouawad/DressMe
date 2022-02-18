@@ -329,5 +329,22 @@ namespace DressMe.Services
 
             return this.repository.FindVesteByCat(categories);
         }
+
+        public List<Haut> FilterByType (List<Haut> hauts, string type)
+        {
+            List<Haut> hautsByType = new List<Haut>() { };
+            Types typeHaut = conversion.OneStringToOneType(type);
+            List<Haut> filteredList = new List<Haut>() { };
+
+            foreach (Haut value in hauts)
+            {
+                if (value.Type == typeHaut)
+                {
+                    filteredList.Add(value);
+                }
+            }
+
+            return filteredList;
+        }
     }
 }

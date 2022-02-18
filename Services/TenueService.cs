@@ -54,32 +54,74 @@ namespace DressMe.Services
         /// </summary>
         /// <param name="type"></param>
         /// <param name="meteo"></param>
-        public Tenue ProposerTenue(string meteo)
+        public Tenue ProposerTenue(string meteo, string type)
         {
             Tenue tenue = new Tenue();
+
+            List<Haut> hauts = new List<Haut>() { };
+            List<Haut> vestes = new List<Haut>() { };
+            List<Bas> bas = new List<Bas>() { };
 
             Random random;
             int index;
 
             // Haut by weather
-            List<Haut> hauts = new List<Haut> { };
-            hauts = hautServ.FindHautByMeteo(meteo);
-            if (hauts.Count == 0)
+            List<Haut> hautsByMeteo = new List<Haut> { };
+            hautsByMeteo = hautServ.FindHautByMeteo(meteo);
+            if (hautsByMeteo.Count == 0)
             {
-                hauts = hautServ.GetAllHauts();
+                hautsByMeteo = hautServ.GetAllHauts();
             }
             // Veste by weather
-            List<Haut> vestes = new List<Haut> { };
+            List<Haut> vestesByMeteo = new List<Haut> { };
             if (meteo == EnumMeteo.frais || meteo == EnumMeteo.froid)
             {
-                vestes = hautServ.FindVesteByMeteo(meteo);
+                vestesByMeteo = hautServ.FindVesteByMeteo(meteo);
             }
             // Bas by weather
-            List<Bas> bas = basServ.FindBasByMeteo(meteo);
-            if (bas.Count == 0)
+            List<Bas> basByMeteo = basServ.FindBasByMeteo(meteo);
+            if (basByMeteo.Count == 0)
             {
-                bas = basServ.FindAll();
+                basByMeteo = basServ.FindAll();
             }
+
+            // Haut By type
+            List<Haut> hautsByType = new List<Haut>() { };
+            hautsByType = hautServ.FilterByType(hautsByMeteo, type);
+            if (hautsByType.Count == 0)
+            {
+                hauts = hautsByMeteo;
+            }
+            else
+            {
+                hauts = hautsByType;
+            }
+            // Vestes by type
+            List<Haut> vestesByType = new List<Haut>() { };
+            if (vestesByMeteo.Count != 0)
+            {
+                vestesByType = hautServ.FilterByType(vestesByMeteo, type);
+                if (vestesByType.Count == 0)
+                {
+                    vestes = vestesByMeteo;
+                }
+                else
+                {
+                    vestes = vestesByType;
+                }
+            }
+            // Bas by type
+            List<Bas> basByType = new List<Bas>() { };
+            basByType = basServ.FilterByType(basByMeteo, type);
+            if (basByType.Count == 0)
+            {
+                bas = basByMeteo;
+            }
+            else
+            {
+                bas = basByType;
+            }
+
             // Tenue
             random = new Random();
             index = random.Next(hauts.Count);

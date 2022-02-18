@@ -289,6 +289,23 @@ namespace DressMe.Services
             return bas;
 
         }
+
+        public List<Bas> FilterByType(List<Bas> bas, string type)
+        {
+            List<Bas> basByType = new List<Bas>() { };
+            Types typeBas = conversion.OneStringToOneType(type);
+            List<Bas> filteredList = new List<Bas>() { };
+
+            foreach (Bas value in bas)
+            {
+                if (value.Type == typeBas)
+                {
+                    filteredList.Add(value);
+                }
+            }
+
+            return filteredList;
+        }
     }
 }
 

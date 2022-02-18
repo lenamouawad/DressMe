@@ -85,5 +85,42 @@ namespace DressMe.Enumerations
 
             return mancheList;
         }
+
+        public List<Types> StringToType(List<string> stringList)
+        {
+            List<Types> typeList = new List<Types>();
+            foreach (string value in stringList)
+            {
+                if (Enum.TryParse<Types>(value, out Types type))
+                {
+                    typeList.Add(type);
+                }
+                else
+                {
+                    throw new NotFoundException($"The type value is not allowed");
+                }
+
+            }
+
+            return typeList;
+        }
+
+        public Types OneStringToOneType(string stringType)
+        {
+            Types type;
+            if (Enum.TryParse<Types>(stringType, out Types convertedType))
+            {
+                type = convertedType;
+            }
+            else
+            {
+                throw new NotFoundException($"The type value is not allowed");
+            }
+
+            return type;
+
+        }
+        }
+
     }
-}
+

@@ -65,12 +65,12 @@ namespace DressMe.Controllers
         /// <param name="type"></param>
         /// <param name="meteo"></param>
         /// <returns></returns>
-        [HttpPost("{meteo}")]
-        public IActionResult ProposerTenue(string meteo)
+        [HttpPost("{meteo}/{type}")]
+        public IActionResult ProposerTenue(string meteo, string type)
         {
             try
             {
-                return Created("", service.ProposerTenue(meteo));
+                return Created("", service.ProposerTenue(meteo, type));
             }
             catch (Exception e)
             {
