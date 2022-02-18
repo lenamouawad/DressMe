@@ -4,7 +4,8 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-
+using System;
+using DressMe.Exceptions;
 
 namespace DressMe.Models
 {
@@ -43,6 +44,7 @@ namespace DressMe.Models
         {
         }
 
+        
 
 
     }

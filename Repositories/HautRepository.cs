@@ -2,7 +2,6 @@
 using DressMe.Exceptions;
 using DressMe.Interfaces;
 using DressMe.Models;
-using DressMe.Enumeration;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -118,112 +117,21 @@ namespace DressMe.Repositories
         }
 
         /// <summary>
-        /// Returns all tops of short sleeve lengths
+        /// Retourne les hauts dans la bdd qui ont une catégorie parmi une liste de catégories et une longueur de manches parmis plusieurs
         /// </summary>
         /// <returns></returns>
-        public List<Haut> GetHautsChauds()
+        public List<Haut> FindHautByManchesEtCat(List<Manches> manches, List<CategorieHaut> categories)
         {
-            Enum.TryParse<Manches>(EnumManches.courtes, out Manches courtes);
-            Enum.TryParse<Manches>(EnumManches.pasDeManches, out Manches pasDeManches);
-            Enum.TryParse<Manches>(EnumManches.bretelles, out Manches bretelles);
-
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.tshirt, out CategorieHaut tshirt);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.top, out CategorieHaut top);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.chemise, out CategorieHaut chemise);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.blouse, out CategorieHaut blouse);
-
-            List<Haut> hauts = this.hauts.Find(haut => (haut.Manches == courtes || haut.Manches == pasDeManches || haut.Manches == bretelles) && 
-                                                       (haut.Categorie == tshirt || haut.Categorie == top || haut.Categorie == blouse || haut.Categorie == chemise))
-                                                       .ToList();
-
-            return hauts;
-        }
-
-        public List<Haut> GetHautsBon()
-        {
-            Enum.TryParse<Manches>(EnumManches.courtes, out Manches courtes);
-            Enum.TryParse<Manches>(EnumManches.longues, out Manches longues);
-
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.top, out CategorieHaut top);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.chemise, out CategorieHaut chemise);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.blouse, out CategorieHaut blouse);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.sweat, out CategorieHaut sweat);
-
-
-            List<Haut> hauts = this.hauts.Find(haut => (haut.Manches == courtes || haut.Manches == longues) &&
-                                                       (haut.Categorie == top || haut.Categorie == chemise || haut.Categorie == blouse || haut.Categorie == sweat))
-                                                       .ToList();
-
-            return hauts;
+            return this.hauts.Find(haut => categories.Contains(haut.Categorie) && manches.Contains(haut.Manches)).ToList(); ;
         }
 
         /// <summary>
-        /// Returns all tops for cold weather
+        /// Retourne les hauts dans la bdd qui sont des catégories vestes
         /// </summary>
         /// <returns></returns>
-        public List<Haut> GetHautsFrais()
+        public List<Haut> FindVesteByCat(List<CategorieHaut> categories)
         {
-            Enum.TryParse<Manches>(EnumManches.longues, out Manches longues);
-
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.top, out CategorieHaut top);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.chemise, out CategorieHaut chemise);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.blouse, out CategorieHaut blouse);
-
-            List<Haut> hauts = this.hauts.Find(haut => (haut.Manches == longues) &&
-                                                       (haut.Categorie == top || haut.Categorie == chemise || haut.Categorie == blouse))
-                                                       .ToList();
-
-            return hauts;
-        }
-
-        /// <summary>
-        /// Returns all tops for cold weather
-        /// </summary>
-        /// <returns></returns>
-        public List<Haut> GetHautsFroid()
-        {
-            Enum.TryParse<Manches>(EnumManches.longues, out Manches longues);
-
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.pull, out CategorieHaut pull);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.sweat, out CategorieHaut sweat);
-
-            List<Haut> hauts = this.hauts.Find(haut => (haut.Manches == longues) &&
-                                                       (haut.Categorie == pull || haut.Categorie == sweat))
-                                                       .ToList();
-
-            return hauts;
-        }
-
-        /// <summary>
-        /// Returns all tops for cold weather
-        /// </summary>
-        /// <returns></returns>
-        public List<Haut> GetVestesFrais()
-        {
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.veste, out CategorieHaut veste);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.blazer, out CategorieHaut blazer);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.trench, out CategorieHaut trench);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.gilet, out CategorieHaut gilet);
-            List<Haut> hauts = this.hauts.Find(haut => haut.Categorie == veste || haut.Categorie == blazer || haut.Categorie == gilet || haut.Categorie == trench)
-                                                       .ToList();
-
-            return hauts;
-        }
-
-        /// <summary>
-        /// Returns all tops for very cold weather
-        /// </summary>
-        /// <returns></returns>
-        public List<Haut> GetVestesFroid()
-        {
-
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.manteau, out CategorieHaut manteau);
-            Enum.TryParse<CategorieHaut>(EnumHautCategorie.doudoune, out CategorieHaut doudoune);
-
-            List<Haut> hauts = this.hauts.Find(haut => haut.Categorie == manteau || haut.Categorie == doudoune)
-                                                       .ToList();
-
-            return hauts;
+            return this.hauts.Find(haut => categories.Contains(haut.Categorie)).ToList(); ;
         }
 
         /// <summary>
@@ -301,19 +209,5 @@ namespace DressMe.Repositories
             return this.hauts.Find(haut => haut.Categorie == categorie).ToList();
         }
 
-        /// <summary>
-        /// Returs all tops that could be worn for a selected weather
-        /// </summary>
-        /// <param name="categorie"></param>
-        /// <returns></returns>
-        public List<Haut> GetByMeteo(string meteo)
-        {
-            List<Haut> hauts = new List<Haut> { };
-            if (meteo == EnumMeteo.bon)
-            {
-                GetAllByManche(EnumManches.courtes);
-            }
-            return hauts;
-        }
     }
 }

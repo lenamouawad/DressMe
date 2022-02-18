@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-//using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -17,8 +11,7 @@ namespace DressMe.Interfaces
         sport,
         decontracte,
         habille,
-        soiree,
-        exterieur
+        soiree
     }
 
     public enum Motifs
@@ -51,9 +44,6 @@ namespace DressMe.Interfaces
         cachemire,
         velours,
         dentelle,
-        tricot,
-        synthetique,
-        polyester,
         autre
     }
 
@@ -92,5 +82,8 @@ namespace DressMe.Interfaces
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public Types Type { get; set; }
+
+        
+
     }
 }
