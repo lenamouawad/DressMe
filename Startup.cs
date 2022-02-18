@@ -1,6 +1,8 @@
 using DressMe.Config;
 using DressMe.Repositories;
 using DressMe.Services;
+using DressMe.Enumerations;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +48,9 @@ namespace DressMe
             // Tenue
             services.AddSingleton<TenueRepository, TenueRepository>();
             services.AddSingleton<TenueService, TenueService>();
+
+            services.AddSingleton<StringToEnumConversions, StringToEnumConversions>();
+
 
             // Controllers
             services.AddControllers();

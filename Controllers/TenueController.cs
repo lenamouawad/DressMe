@@ -22,6 +22,42 @@ namespace DressMe.Controllers
             this.service = service;
         }
 
+        /// <summary>
+        /// Returns all outfits
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("allTenue")]
+        public IActionResult GetAllTenue()
+        {
+            try
+            {
+                return Ok(this.service.GetAllTenue());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete all tenues
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("deleteAllTenue")]
+        public IActionResult DeleteAllTenue()
+        {
+            try
+            {
+                this.service.DeleteAllTenue();
+                return Ok("All the outfits are deleted");
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
         //POST : localhost:port/api/tenue
         /// <summary>
         /// Creates an outfit
@@ -29,12 +65,12 @@ namespace DressMe.Controllers
         /// <param name="type"></param>
         /// <param name="meteo"></param>
         /// <returns></returns>
-        [HttpPost("{meteo}")]
-        public IActionResult ProposerTenue(string meteo)
+        [HttpPost("{meteo}/{type}")]
+        public IActionResult ProposerTenue(string meteo, string type)
         {
             try
             {
-                return Created("", service.ProposerTenue(meteo));
+                return Created("", service.ProposerTenue(meteo, type));
             }
             catch (Exception e)
             {

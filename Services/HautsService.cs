@@ -1,4 +1,5 @@
-﻿using DressMe.Exceptions;
+﻿using DressMe.Enumerations;
+using DressMe.Exceptions;
 using DressMe.Interfaces;
 using DressMe.Models;
 using DressMe.Repositories;
@@ -12,9 +13,12 @@ namespace DressMe.Services
     public class HautsService
     {
         private HautRepository repository;
-        public HautsService(HautRepository repository)
+        private StringToEnumConversions conversion;
+
+        public HautsService(HautRepository repository, StringToEnumConversions conversion)
         {
             this.repository = repository;
+            this.conversion = conversion;
         }
 
         /// <summary>
@@ -237,6 +241,110 @@ namespace DressMe.Services
             }
 
             return listHauts;
+        }
+
+        /// <summary>
+        /// Permet de récupérer les hauts de la bdd qui appartiennent a une categorie convenable a une meteo donnée
+        /// </summary>
+        /// <param name="meteo"></param>
+        /// <returns></returns>
+        public List<Haut> FindHautByMeteo(string meteo)
+        {
+            List<string> stringListManche = new List<string>();
+            List<string> stringListCategorie = new List<string>();
+
+
+            if (meteo == EnumMeteo.chaud)
+            {
+                stringListManche.Add(EnumManches.courtes);
+                stringListManche.Add(EnumManches.pasDeManches);
+                stringListManche.Add(EnumManches.bretelles);
+
+                stringListCategorie.Add(EnumHautCategorie.tshirt);
+                stringListCategorie.Add(EnumHautCategorie.top);
+                stringListCategorie.Add(EnumHautCategorie.chemise);
+                stringListCategorie.Add(EnumHautCategorie.blouse);
+            }
+            else if (meteo == EnumMeteo.bon)
+            {
+                stringListManche.Add(EnumManches.courtes);
+                stringListManche.Add(EnumManches.longues);
+
+                stringListCategorie.Add(EnumHautCategorie.top);
+                stringListCategorie.Add(EnumHautCategorie.tshirt);
+                stringListCategorie.Add(EnumHautCategorie.chemise);
+                stringListCategorie.Add(EnumHautCategorie.blouse);
+            }
+            else if (meteo == EnumMeteo.frais)
+            {
+                stringListManche.Add(EnumManches.longues);
+
+                stringListCategorie.Add(EnumHautCategorie.sweat);
+                stringListCategorie.Add(EnumHautCategorie.chemise);
+                stringListCategorie.Add(EnumHautCategorie.blouse);
+            }
+            else if (meteo == EnumMeteo.froid)
+            {
+                stringListManche.Add(EnumManches.longues);
+
+                stringListCategorie.Add(EnumHautCategorie.pull);
+                stringListCategorie.Add(EnumHautCategorie.sweat);
+            }
+            else 
+            { 
+                throw new NotFoundException($"La météo indiquée n'est pas valide");
+            }
+
+            List<Manches> manches = conversion.StringToManche(stringListManche);
+            List<CategorieHaut> categories = conversion.StringToCategorieHaut(stringListCategorie);
+
+            List<Haut> hauts = this.repository.FindHautByManchesEtCat(manches, categories);
+
+            return hauts;
+        }
+
+        /// <summary>
+        /// Permet de récupérer les vestes de la bdd qui appartiennent a une categorie convenable a une meteo donnée
+        /// </summary>
+        /// <param name="meteo"></param>
+        /// <returns></returns>
+        public List<Haut> FindVesteByMeteo(string meteo)
+        {
+            List<string> stringListCategorie = new List<string>();
+
+            if (meteo == EnumMeteo.frais)
+            {
+                stringListCategorie.Add(EnumHautCategorie.veste);
+                stringListCategorie.Add(EnumHautCategorie.blazer);
+                stringListCategorie.Add(EnumHautCategorie.trench);
+                stringListCategorie.Add(EnumHautCategorie.gilet);
+            }
+            else if (meteo == EnumMeteo.froid)
+            {
+                stringListCategorie.Add(EnumHautCategorie.manteau);
+                stringListCategorie.Add(EnumHautCategorie.doudoune);
+            }
+
+            List<CategorieHaut> categories = conversion.StringToCategorieHaut(stringListCategorie);
+
+            return this.repository.FindVesteByCat(categories);
+        }
+
+        public List<Haut> FilterByType (List<Haut> hauts, string type)
+        {
+            List<Haut> hautsByType = new List<Haut>() { };
+            Types typeHaut = conversion.OneStringToOneType(type);
+            List<Haut> filteredList = new List<Haut>() { };
+
+            foreach (Haut value in hauts)
+            {
+                if (value.Type == typeHaut)
+                {
+                    filteredList.Add(value);
+                }
+            }
+
+            return filteredList;
         }
     }
 }

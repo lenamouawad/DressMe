@@ -1,5 +1,6 @@
 ﻿using DressMe.Config;
 using DressMe.Interfaces;
+using DressMe.Enumerations;
 using DressMe.Models;
 using MongoDB.Driver;
 using System;
@@ -11,12 +12,13 @@ namespace DressMe.Repositories
     public class BasRepository
     {
         private readonly IMongoCollection<Bas> repo;
+        private StringToEnumConversions conversion;
 
-        public BasRepository(IDressMeDatabaseSettings settings)
+        public BasRepository(IDressMeDatabaseSettings settings, StringToEnumConversions conversion)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
-
+            this.conversion = conversion;
             repo = database.GetCollection<Bas>(settings.BasCollectionName);
         }
 
@@ -48,6 +50,10 @@ namespace DressMe.Repositories
             this.repo.DeleteOne(b => b.Id == id);
         }
 
+        /// <summary>
+        /// Retourne les bas dans la bdd qui ont une catégorie donnée
+        /// </summary>
+        /// <returns></returns>
         public List<Bas> FindByCategorie(string categorie)
         {
             List<Bas> basByCategorie = new List<Bas>() { };
@@ -59,6 +65,38 @@ namespace DressMe.Repositories
             return basByCategorie;
         }
 
+
+        /// <summary>
+        /// Retourne les bas dans la bdd qui ont une catégorie parmi une liste de catégories
+        /// </summary>
+        /// <returns></returns>
+        public List<Bas> FindByCategories(List<CategorieBas> categories)
+        {
+            return this.repo.Find(bas => categories.Contains(bas.Categorie)).ToList(); ;
+        }
+
+        /// <summary>
+        /// Retourne les bas dans la bdd qui ont une matière parmi une liste de matières
+        /// </summary>
+        /// <returns></returns>
+        public List<Bas> FindByMatieres(List<Matiere> matieres)
+        {
+            return this.repo.Find(bas => matieres.Contains(bas.Matiere)).ToList(); ;
+        }
+
+        /// <summary>
+        /// Retourne les bas dans la bdd qui ont une matière et une categorie parmi une liste de matières et une liste de categories données
+        /// </summary>
+        /// <returns></returns>
+        public List<Bas> FindByMatieresEtCategories(List<Matiere> matieres, List<CategorieBas> categories)
+        {
+            return this.repo.Find(bas => matieres.Contains(bas.Matiere) && categories.Contains(bas.Categorie)).ToList(); ;
+        }
+
+        /// <summary>
+        /// Retourne les bas dans la bdd qui ont une matière donnée
+        /// </summary>
+        /// <returns></returns>
         public List<Bas> FindByMatiere(string matiere)
         {
             List<Bas> basByMatiere = new List<Bas>() { };
@@ -125,5 +163,6 @@ namespace DressMe.Repositories
             this.repo.DeleteMany(bas => true);
             return this.repo.Find(bas => true).ToList();
         }
+
     }
 }

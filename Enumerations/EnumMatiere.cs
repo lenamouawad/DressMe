@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DressMe.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,10 +17,7 @@ namespace DressMe.Enumerations
         public const string laine = "laine";
         public const string cachemire = "cachemire";
         public const string velours = "velours";
-        public const string tricot = "tricot";
 
-        public const string polyester = "polyester"; 
-        public const string synthetique = "synthetique";
         public const string autre = "autre";
         public const string cuir = "cuir";
 

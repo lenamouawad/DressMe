@@ -89,9 +89,34 @@ namespace DressMe.Controllers
 
         }
 
-        
+        [HttpGet("matieres/{meteo}")]
 
-        
+        public IActionResult FindByMatieres(string meteo)
+        {
+            try
+            {
+                return Ok(this.service.FindBasByMatieres(meteo));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpGet("categories/{meteo}")]
+
+        public IActionResult FindByCategories(string meteo)
+        {
+            try
+            {
+                return Ok(this.service.FindBasByCategories(meteo));
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
 
         /// <summary>
         /// Delete all Bas

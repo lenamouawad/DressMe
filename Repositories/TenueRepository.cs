@@ -40,6 +40,25 @@ namespace DressMe.Repositories
         }
 
         /// <summary>
+        /// Returns all outfits
+        /// </summary>
+        /// <returns></returns>
+        public List<Tenue> GetAllTenue()
+        {
+            return this.tenues.Find(tenue => true).ToList();
+        }
+
+        /// <summary>
+        /// Delete all tenues
+        /// </summary>
+        /// <returns></returns>
+        public List<Tenue> DeleteAllTenue()
+        {
+            this.tenues.DeleteMany(tenue => true);
+            return this.tenues.Find(tenue => true).ToList();
+        }
+
+        /// <summary>
         /// Find screening DTO from the screening Id
         /// </summary>
         /// <param name="id"></param>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DressMe.Enumeration
+namespace DressMe.Enumerations
 {
     public class EnumMeteo
     {
