@@ -136,11 +136,14 @@ namespace DressMe.Services
                 tenue.veste = hautRepo.FindById(tenue.vesteId);
             }
 
-            random = new Random();
-            index = random.Next(bas.Count);
-            tenue.basId = (bas[index].Id);
-            tenue.bas = basRepo.FindById(tenue.basId);
-
+            if (tenue.haut.Categorie != CategorieHaut.robe)
+            {
+                random = new Random();
+                index = random.Next(bas.Count);
+                tenue.basId = (bas[index].Id);
+                tenue.bas = basRepo.FindById(tenue.basId);
+            }
+            
             List<Tenue> tenues = repo.AddTenue(tenue);
 
             return tenue;
