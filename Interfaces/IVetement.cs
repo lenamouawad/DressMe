@@ -64,7 +64,8 @@ namespace DressMe.Interfaces
         vert,
         blanc,
         noir,
-        bordeaux
+        bordeaux,
+        denim
     }
 
     public interface IVetement
