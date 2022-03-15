@@ -39,6 +39,7 @@ namespace DressMe.Models
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public CategorieBas Categorie { get; set; }
+        public bool EstFavoris;
 
         public Bas()
         {

@@ -60,6 +60,26 @@ namespace DressMe.Controllers
             }
         }
 
+        [HttpPut("estFavoris/{id}")]
+        public IActionResult estFavoris(string id)
+        {
+            try
+            {
+                this.service.EstFavoris(id);
+                return Ok($"L'article a été mise a jour");
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("AllFavoris")]
+        public IActionResult FindAllFavoris()
+        {
+            return Ok(this.service.FindAllFavoris());
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {

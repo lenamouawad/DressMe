@@ -58,6 +58,21 @@ namespace DressMe.Services
             return bas;
         }
 
+        public void EstFavoris(string id)
+        {
+            this.repository.EstFavoris(id);
+        }
+
+        public List<Bas> FindAllFavoris()
+        {
+            List<Bas> listBas = this.repository.FindAllFavoris();
+            if (listBas == null)
+            {
+                throw new NotFoundException($"Not found favoris articles");
+            }
+            return listBas;
+        }
+
         /// <summary>
         /// Delete all Bas
         /// </summary>
