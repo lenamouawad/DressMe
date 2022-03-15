@@ -65,6 +65,26 @@ namespace DressMe.Repositories
             return basByCategorie;
         }
 
+        /// <summary>
+        /// Mettre un article en favoris ou non
+        /// </summary>
+        /// <param name="id"></param>
+        public void EstFavoris(string id)
+        {
+            Bas bas = FindById(id);
+            bas.EstFavoris = !bas.EstFavoris;
+            Update(id, bas);
+        }
+
+        /// <summary>
+        /// Recuperer tous les articles favoris
+        /// </summary>
+        /// <returns></returns>
+        public List<Bas> FindAllFavoris()
+        {
+            return this.repo.Find(b => b.EstFavoris == true).ToList();
+        }
+
 
         /// <summary>
         /// Retourne les bas dans la bdd qui ont une catégorie parmi une liste de catégories

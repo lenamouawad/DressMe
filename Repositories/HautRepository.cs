@@ -117,6 +117,26 @@ namespace DressMe.Repositories
         }
 
         /// <summary>
+        /// change in true or false favoris
+        /// </summary>
+        /// <param name="id"></param>
+        public void EstFavoris(string id)
+        {
+            Haut haut = FindById(id);
+            haut.EstFavoris = !haut.EstFavoris;
+            UpdateHaut(id, haut);
+        }
+        /// <summary>
+        /// Recuperer tous les articles favoris
+        /// </summary>
+        /// <returns></returns>
+        public List<Haut> FindAllFavoris()
+        {
+            return this.hauts.Find(h => h.EstFavoris == true).ToList();
+        }
+
+
+        /// <summary>
         /// Retourne les hauts dans la bdd qui ont une catégorie parmi une liste de catégories et une longueur de manches parmis plusieurs
         /// </summary>
         /// <returns></returns>

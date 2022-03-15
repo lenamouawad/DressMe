@@ -52,6 +52,21 @@ namespace DressMe.Services
             return haut;
         }
 
+        public void EstFavoris(string id)
+        {
+            this.repository.EstFavoris(id);
+        }
+
+        public List<Haut> FindAllFavoris()
+        {
+            List<Haut> listHaut = this.repository.FindAllFavoris();
+            if (listHaut == null)
+            {
+                throw new NotFoundException($"Not found favoris articles");
+            }
+            return listHaut;
+        }
+
         /// <summary>
         /// Delete Top
         /// </summary>

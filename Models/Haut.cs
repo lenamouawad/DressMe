@@ -58,6 +58,7 @@ namespace DressMe.Models
         public Manches Manches { get; set; }
         public bool EstImpermeable { get; set; }
         public bool ACapuche { get; set; }
+        public bool EstFavoris;
 
     }
 }
