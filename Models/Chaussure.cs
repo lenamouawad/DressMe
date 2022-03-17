@@ -38,6 +38,7 @@ namespace DressMe.Models
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public CategorieChaussure categorieChaussure;
+        public bool EstFavoris;
 
     }
 }
