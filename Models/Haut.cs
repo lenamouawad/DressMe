@@ -1,5 +1,4 @@
-﻿
-using DressMe.Interfaces;
+﻿using DressMe.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;

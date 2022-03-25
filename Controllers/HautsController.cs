@@ -85,7 +85,7 @@ namespace DressMe.Controllers
         /// </summary>
         /// <param name="id">Top id</param>
         /// <returns></returns>
-        [HttpDelete("delete/{hautId}")]
+        [HttpDelete("delete/{id}")]
         public IActionResult DeleteHaut(string id)
         {
             try

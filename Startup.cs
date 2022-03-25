@@ -48,6 +48,8 @@ namespace DressMe
             // Tenue
             services.AddSingleton<TenueRepository, TenueRepository>();
             services.AddSingleton<TenueService, TenueService>();
+            // Article
+            services.AddSingleton<ArticleService, ArticleService>();
 
             services.AddSingleton<StringToEnumConversions, StringToEnumConversions>();
 
@@ -68,13 +70,16 @@ namespace DressMe
             }
 
             app.UseRouting();
+            app.UseCors("MyPolicy");
 
-            app.UseAuthorization();
+
+            /*app.UseAuthorization();*/
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+           
         }
     }
 }
