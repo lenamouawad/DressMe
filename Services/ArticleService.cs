@@ -45,6 +45,7 @@ namespace DressMe.Services
                     IdInCategory = haut.Id,
                     Category = 1,
                     ImgUrl = haut.ImgUrl,
+                    estFavoris = haut.EstFavoris,
                 };
                 articles.Add(article);
             }
@@ -56,6 +57,7 @@ namespace DressMe.Services
                     IdInCategory = ba.Id,
                     Category = 2,
                     ImgUrl = ba.ImgUrl,
+                    estFavoris = ba.EstFavoris,
                 };
                 articles.Add(article);
             }
