@@ -13,15 +13,18 @@ namespace DressMe.DTO
         public int Category { get; set; }
         public string ImgUrl { get; set; }
 
+        public bool estFavoris { get; set; }
+
         public Article()
         {
         }
 
-        public Article(string idInCategory, int category, string imgUrl)
+        public Article(string idInCategory, int category, string imgUrl, bool estFavoris)
         {
             this.IdInCategory = idInCategory;
             this.Category = category;
             this.ImgUrl = imgUrl;
+            this.estFavoris = estFavoris;
         }
     }
 }
