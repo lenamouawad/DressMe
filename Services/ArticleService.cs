@@ -65,6 +65,16 @@ namespace DressMe.Services
             var rnd = new Random();
             return articles.OrderBy(item => rnd.Next()).ToList();
         }
+
+        /// <summary>
+        /// Returns all favorite articles
+        /// </summary>
+        /// <returns></returns>
+        public List<Article> GetAllArticlesFavoris()
+        {
+            List<Article> allArticles = GetAllArticles();
+            return allArticles.Where(article => article.estFavoris == true).ToList();
+        }
     }
 
 

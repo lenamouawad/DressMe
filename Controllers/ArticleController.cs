@@ -32,5 +32,22 @@ namespace DressMe.Controllers
                 return NotFound(e.Message);
             }
         }
+
+        /// <summary>
+        /// Returns all tops
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("favoris")]
+        public IActionResult GetAllArticlesFavoris()
+        {
+            try
+            {
+                return Ok(this.service.GetAllArticlesFavoris());
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
     }
 }
