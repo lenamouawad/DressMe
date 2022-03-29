@@ -37,7 +37,7 @@ namespace DressMe.Models
         public List<Couleur> Couleur;
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
-        public CategorieChaussure categorieChaussure;
+        public CategorieChaussure Categorie { get; set; }
         public bool EstFavoris;
 
     }
