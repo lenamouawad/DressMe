@@ -65,7 +65,7 @@ namespace DressMe.Controllers
         /// <param name="type"></param>
         /// <param name="meteo"></param>
         /// <returns></returns>
-        [HttpPost("{meteo}/{type}")]
+        [HttpGet("{meteo}/{type}")]
         public IActionResult ProposerTenue(string meteo, string type)
         {
             try
