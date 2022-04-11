@@ -28,7 +28,24 @@ namespace DressMe.Enumerations
 
             return matiereList;
         }
+        public List<CategorieChaussure> StringToCategorieChaussure(List<string> stringList)
+        {
+            List<CategorieChaussure> categorieList = new List<CategorieChaussure>();
+            foreach (string value in stringList)
+            {
+                if (Enum.TryParse<CategorieChaussure>(value, out CategorieChaussure categorie))
+                {
+                    categorieList.Add(categorie);
+                }
+                else
+                {
+                    throw new NotFoundException($"The category value is not allowed");
+                }
 
+            }
+
+            return categorieList;
+        }
         public List<CategorieBas> StringToCategorieBas(List<string> stringList)
         {
             List<CategorieBas> categorieList = new List<CategorieBas>();
