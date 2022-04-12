@@ -58,9 +58,9 @@ namespace DressMe.Services
             return chaussure;
         }
 
-        public void EstFavoris(string id)
+        public void EstFavoris(string id, Chaussure chaussure)
         {
-            this.repository.EstFavoris(id);
+            this.repository.EstFavoris(id, chaussure);
         }
 
         public List<Chaussure> FindAllFavoris()

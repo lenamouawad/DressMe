@@ -69,7 +69,7 @@ namespace DressMe.Repositories
         /// Mettre un article en favoris ou non
         /// </summary>
         /// <param name="id"></param>
-        public void EstFavoris(string id)
+        public void EstFavoris(string id, Chaussure chaussure)
         {
             Chaussure c = FindById(id);
             c.EstFavoris = !c.EstFavoris;

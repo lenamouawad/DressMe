@@ -60,11 +60,11 @@ namespace DressMe.Controllers
         }
 
         [HttpPut("estFavoris/{id}")]
-        public IActionResult estFavoris(string id)
+        public IActionResult estFavoris(string id, Chaussure chaussure)
         {
             try
             {
-                this.service.EstFavoris(id);
+                this.service.EstFavoris(id, chaussure);
                 return Ok($"L'article a été mise a jour");
             }
             catch (Exception e)

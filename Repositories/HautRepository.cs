@@ -120,7 +120,7 @@ namespace DressMe.Repositories
         /// change in true or false favoris
         /// </summary>
         /// <param name="id"></param>
-        public void EstFavoris(string id)
+        public void EstFavoris(string id, Haut h)
         {
             Haut haut = FindById(id);
             haut.EstFavoris = !haut.EstFavoris;
