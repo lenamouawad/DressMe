@@ -52,9 +52,9 @@ namespace DressMe.Services
             return haut;
         }
 
-        public void EstFavoris(string id)
+        public void EstFavoris(string id, Haut haut)
         {
-            this.repository.EstFavoris(id);
+            this.repository.EstFavoris(id, haut);
         }
 
         public List<Haut> FindAllFavoris()

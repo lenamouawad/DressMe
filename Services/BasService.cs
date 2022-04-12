@@ -58,9 +58,9 @@ namespace DressMe.Services
             return bas;
         }
 
-        public void EstFavoris(string id)
+        public void EstFavoris(string id, Bas bas)
         {
-            this.repository.EstFavoris(id);
+            this.repository.EstFavoris(id, bas);
         }
 
         public List<Bas> FindAllFavoris()
