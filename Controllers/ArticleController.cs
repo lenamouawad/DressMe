@@ -2,6 +2,7 @@
 using DressMe.Exceptions;
 using DressMe.Services;
 using System;
+using DressMe.DTO;
 
 namespace DressMe.Controllers
 {
@@ -47,6 +48,20 @@ namespace DressMe.Controllers
             catch (NotFoundException e)
             {
                 return NotFound(e.Message);
+            }
+        }
+
+        [HttpPut("estFavoris/{id}")]
+        public IActionResult estFavoris(string id, Article article)
+        {
+            try
+            {
+                this.service.EstFavoris(id, article);
+                return Ok($"L'article a été mise a jour");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }
