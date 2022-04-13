@@ -18,15 +18,16 @@ namespace DressMe.Services
         private BasRepository basRepo;
         private BasService basServ;
         private HautsService hautServ;
-
         private ChaussureRepository chausRepo;
+        private ChaussuresService chausServ;
 
-        public TenueService(TenueRepository repo, HautRepository hautRepo, BasService basServ, ChaussureRepository chausRepo, BasRepository basRepo, HautsService hautServ)
+        public TenueService(TenueRepository repo, HautRepository hautRepo, BasService basServ, ChaussureRepository chausRepo,ChaussuresService chausServ, BasRepository basRepo, HautsService hautServ)
         {
             this.repo = repo;
             this.hautRepo = hautRepo;
             this.basRepo = basRepo;
             this.chausRepo = chausRepo;
+            this.chausServ = chausServ;
             this.basServ = basServ;
             this.hautServ = hautServ;
         }
@@ -61,6 +62,7 @@ namespace DressMe.Services
             List<Haut> hauts = new List<Haut>() { };
             List<Haut> vestes = new List<Haut>() { };
             List<Bas> bas = new List<Bas>() { };
+            List<Chaussure> chaussures = new List<Chaussure>() { };
 
             Random random;
             int index;
@@ -126,6 +128,26 @@ namespace DressMe.Services
                 bas = basByType;
             }
 
+
+            // Récupérer tous les chaussures convenables
+            // Chzussures by weather
+            List<Chaussure> chaussuresByMeteo = chausServ.FindChaussureByMeteo(meteo);
+            if (chaussuresByMeteo.Count == 0)
+            {
+                chaussuresByMeteo = chausServ.FindAll();
+            }
+            // Chaussures by type
+            List<Chaussure> chaussuresByType = new List<Chaussure>() { };
+            chaussuresByType = chausServ.FilterByType(chaussuresByMeteo, type);
+            if (chaussuresByType.Count == 0)
+            {
+                chaussures = chaussuresByMeteo;
+            }
+            else
+            {
+                chaussures = chaussuresByType;
+            }
+
             // Tenue
             AssocierArticles(hauts, vestes, bas);
 
@@ -149,7 +171,20 @@ namespace DressMe.Services
                 tenue.basId = (bas[index].Id);
                 tenue.bas = basRepo.FindById(tenue.basId);
             }
-            
+            /*Ajouter chaussures 
+             * Prendre chauussure qui a la meme couleur que le haut
+             * sinon prendre noir ou blanc 
+             * sinon prendre le premier de la liste
+            */
+            tenue.chaussure = chaussures.FirstOrDefault(c => c.Couleur.Contains(tenue.haut.Couleur.First()));
+            if (tenue.chaussure == null)
+            {
+                tenue.chaussure = chaussures.FirstOrDefault(c => c.Couleur.Contains(Couleur.noir) || c.Couleur.Contains(Couleur.blanc));
+            }
+            if (tenue.chaussure == null)
+            {
+                tenue.chaussure = chaussures.First();
+            }
             List<Tenue> tenues = repo.AddTenue(tenue);
 
             return tenue;

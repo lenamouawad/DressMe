@@ -14,8 +14,7 @@ namespace DressMe.Models
 {
     public enum CategorieChaussure
     {
-        talon,
-        plates,
+        escarpîns,
         basket,
         sandales,
         bottes,

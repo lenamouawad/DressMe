@@ -7,8 +7,7 @@ namespace DressMe.Enumerations
 {
     public class EnumChaussureCategorie
     {
-        public const string talon = "talon";
-        public const string plates = "plates";
+        public const string escarpin = "escarpin";
         public const string basket = "basket";
         public const string sandales = "sandales";
         public const string bottes = "bottes";
