@@ -165,13 +165,12 @@ namespace DressMe.Services
             if (meteo == EnumMeteo.chaud)
             {
                 stringList.Add(EnumChaussureCategorie.sandales);
-                stringList.Add(EnumChaussureCategorie.plates);
                 stringList.Add(EnumChaussureCategorie.mocassin);
             }
             else if (meteo == EnumMeteo.bon)
             {
-                stringList.Add(EnumChaussureCategorie.plates);
-                stringList.Add(EnumChaussureCategorie.talon);
+                stringList.Add(EnumChaussureCategorie.escarpin);
+                stringList.Add(EnumChaussureCategorie.basket);
 
             }
             else if (meteo == EnumMeteo.frais || meteo == EnumMeteo.froid)
@@ -205,7 +204,7 @@ namespace DressMe.Services
         /// </summary>
         /// <param name="meteo"></param>
         /// <returns></returns>
-        public List<Chaussure> FindBasByMeteo(string meteo)
+        public List<Chaussure> FindChaussureByMeteo(string meteo)
         {
             List<Chaussure> chaussures = new List<Chaussure>();
 
