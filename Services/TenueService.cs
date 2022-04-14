@@ -130,8 +130,8 @@ namespace DressMe.Services
 
 
             // Récupérer tous les chaussures convenables
-            // Chzussures by weather
-            List<Chaussure> chaussuresByMeteo = chausServ.FindChaussureByMeteo(meteo);
+            // Chaussures by weather
+            /*List<Chaussure> chaussuresByMeteo = chausServ.FindChaussureByMeteo(meteo);
             if (chaussuresByMeteo.Count == 0)
             {
                 chaussuresByMeteo = chausServ.FindAll();
@@ -146,7 +146,7 @@ namespace DressMe.Services
             else
             {
                 chaussures = chaussuresByType;
-            }
+            }*/
 
             // Tenue
             AssocierArticles(hauts, vestes, bas);
@@ -176,7 +176,7 @@ namespace DressMe.Services
              * sinon prendre noir ou blanc 
              * sinon prendre le premier de la liste
             */
-            tenue.chaussure = chaussures.FirstOrDefault(c => c.Couleur.Contains(tenue.haut.Couleur.First()));
+            /*tenue.chaussure = chaussures.FirstOrDefault(c => c.Couleur.Contains(tenue.haut.Couleur.First()));
             if (tenue.chaussure == null)
             {
                 tenue.chaussure = chaussures.FirstOrDefault(c => c.Couleur.Contains(Couleur.noir) || c.Couleur.Contains(Couleur.blanc));
@@ -184,7 +184,7 @@ namespace DressMe.Services
             if (tenue.chaussure == null)
             {
                 tenue.chaussure = chaussures.First();
-            }
+            }*/
             List<Tenue> tenues = repo.AddTenue(tenue);
 
             return tenue;
