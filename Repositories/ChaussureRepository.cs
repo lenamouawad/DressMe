@@ -19,7 +19,7 @@ namespace DressMe.Repositories
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             this.conversion = conversion;
-            repo = database.GetCollection<Chaussure>(settings.BasCollectionName);
+            repo = database.GetCollection<Chaussure>(settings.ChaussureCollectionName);
         }
 
         public Chaussure FindById(string id)
